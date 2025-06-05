@@ -1,0 +1,12 @@
+{
+  "name": "frais-vocal",
+  "version": "1.0.0",
+  "description": "Assistant vocal de gestion de notes de frais",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
