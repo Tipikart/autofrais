@@ -195,6 +195,12 @@ function addRow(data) {
         btn.onclick = () => addPhoto(index);
         photoCell.appendChild(btn);
     }
+
+       const deleteCell = row.insertCell(7);
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = '🗑️';
+    deleteBtn.onclick = () => deleteExpense(index);
+    deleteCell.appendChild(deleteBtn);
 }
 
 function addPhoto(index) {
@@ -287,3 +293,18 @@ function exportCSV() {
     URL.revokeObjectURL(url);
 }
 
+function deleteExpense(index) {
+    const expense = expenses[index];
+    if (!expense) return;
+
+    fetch('/api/expenses', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(expense)
+    })
+    .then(() => {
+        expenses.splice(index, 1);
+        filterTable(); // recharge le tableau filtré
+    })
+    .catch(err => console.error('Erreur suppression :', err));
+}

@@ -48,6 +48,19 @@ app.post('/api/expenses', (req, res) => {
     res.status(500).json({ error: 'save_failed' });
   }
 });
+app.delete('/api/expenses', (req, res) => {
+    const data = req.body;
+    expenses = expenses.filter(e =>
+        !(e.date === data.date &&
+          e.montant === data.montant &&
+          e.fournisseur === data.fournisseur &&
+          e.type_depense === data.type_depense &&
+          e.mission === data.mission &&
+          e.ligne_comptable === data.ligne_comptable)
+    );
+    res.sendStatus(200);
+});
+
 
 app.post('/upload', upload.single('photo'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
