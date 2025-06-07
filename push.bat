@@ -1,16 +1,16 @@
 @echo off
-cd /d %~dp0
-
-REM Initialisation du dépôt git
-git init
-
-REM Ajout de tous les fichiers
+echo ─── 📂 AJOUT DES MODIFICATIONS ───
 git add .
 
-REM Premier commit
-git commit -m "🎤 Première version de Frais Vocal : saisie vocale + tableau + export CSV"
+echo ─── 💬 COMMIT ───
+set /p message=Entrez votre message de commit :
+git commit -m "%message%"
 
-REM Création du repo GitHub (nécessite GitHub CLI installé et authentifié)
-gh repo create frais-vocal --public --source=. --remote=origin --push
+echo ─── 🔄 PULL (intégration des modifs distantes) ───
+git pull --rebase
 
+echo ─── 🚀 PUSH VERS GITHUB ───
+git push origin master
+
+echo ─── ✅ TERMINÉ ───
 pause
